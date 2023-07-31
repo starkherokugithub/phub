@@ -4,7 +4,7 @@ import os
 import json
 import requests
 from dataclasses import dataclass
-from typing import Callable, Self
+from typing import Callable
 
 from phfetch import utils
 
@@ -21,39 +21,6 @@ class Tag:
     
     def __post_init__(self) -> None:
         self.count = int(self.count)
-
-@dataclass
-class Author:
-    url: str
-    name: str
-    model_type: str
-    videos: str
-    subscribers: str
-    
-    @classmethod
-    def parse(cls, video: Video) -> Self:
-        '''
-        Parse the author from a video page.
-        '''
-        
-        return cls(
-            
-            # TODO
-            url = None,
-            videos = None,
-            subscribers = None,
-            
-            name = video.datalayer['videodata']['video_uploader_name'],
-            model_type = video.datalayer['videodata']['video_uploader']
-            
-        )
-    
-    def __eq__(self, other: Author) -> bool:
-        '''
-        Compares two authors.
-        '''
-        
-        return self.url == other.url
 
 
 class Video:
